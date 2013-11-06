@@ -16,6 +16,7 @@ var stylus = require('stylus');
 var nib = require('nib');
 
 /* Set Up App */
+process.env.TZ = 'Europe/London';
 var app = express()
 function compile(str, path) {
   return stylus(str)
@@ -36,7 +37,22 @@ app.use(express.logger());
 
 // Index
 app.get('/', function (req, res) {
-	res.render('index',{
+
+	// Check that the office is open
+	var d=new Date();
+	if(d.getDay()>=1 && d.getDay()<=5 && d.getHours()>=9 && d.getHours()<17)
+	{
+		require('./menuOptions.js');	
+		console.log(d.getDay());
+		console.log(d.getHours());
+		var openClosed = 'index';
+	}
+	else
+	{
+		var openClosed = 'closed';
+	}
+
+	res.render(openClosed,{
 		title : 'Home'
 	})
 })
