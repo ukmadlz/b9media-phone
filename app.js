@@ -31,7 +31,8 @@ app.use(stylus.middleware(
 		compile: compile
 	}
 ))
-app.use(express.static(__dirname + '/public'))
+app.use(express.static(__dirname + '/public'));
+app.use(express.logger());
 
 // Index
 app.get('/', function (req, res) {
@@ -41,4 +42,7 @@ app.get('/', function (req, res) {
 })
 
 // Start Listening
-app.listen(3000)
+var port = process.env.PORT || 3000;
+app.listen(port, function() {
+  console.log("Listening on " + port);
+});
