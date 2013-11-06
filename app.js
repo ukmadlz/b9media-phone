@@ -63,8 +63,12 @@ app.get('/', function (req, res) {
 app.get('/dial',function (req, res) {
 	var keyPressed = req.query.Digits;
 
+	var a = require('./menuOptions.js');	
+	menuOptions = a.menuOptions;
+
 	res.render('dial',{
-		key: keyPressed
+		name: menuOptions[keyPressed].name,
+		number: menuOptions[keyPressed].number
 	})
 });
 
