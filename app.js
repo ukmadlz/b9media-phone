@@ -14,6 +14,8 @@ var jade = require('jade');
 var stylus = require('stylus');
 // Nib
 var nib = require('nib');
+// URL
+var url = require('url');
 
 /* Set Up App */
 process.env.TZ = 'Europe/London';
@@ -40,22 +42,31 @@ app.get('/', function (req, res) {
 
 	// Check that the office is open
 	var d=new Date();
-	if(d.getDay()>=1 && d.getDay()<=5 && d.getHours()>=9 && d.getHours()<17)
+	if(d.getDay()>=1 && d.getDay()<=5 && d.getHours()>=9 && d.getHours()>17)
 	{
-		require('./menuOptions.js');	
-		console.log(d.getDay());
-		console.log(d.getHours());
+		var a = require('./menuOptions.js');	
+		menuOptions = a.menuOptions;
 		var openClosed = 'index';
 	}
 	else
 	{
 		var openClosed = 'closed';
+		var menuOptions = [];
 	}
 
 	res.render(openClosed,{
-		title : 'Home'
+		menu: menuOptions
 	})
-})
+});
+
+// Dial
+app.get('/dial',function (req, res) {
+	var keyPressed = req.query.Digits;
+
+	res.render('dial',{
+		key: keyPressed
+	})
+});
 
 // Start Listening
 var port = process.env.PORT || 3000;
