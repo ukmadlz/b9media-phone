@@ -2,6 +2,6 @@ extend layout
 block content
 	Say(voice='man')
 		| Calling #{name}
-	Dial
+	Dial(callerId="#{name}")
 		Number
 			|#{number}
