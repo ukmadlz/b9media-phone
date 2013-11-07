@@ -75,7 +75,7 @@ app.get('/dial',function (req, res) {
 	{
 		res.render('record',{
 			menu: menuOptions,
-			from: req.query.From
+			dialledFrom: req.query.From
 		});
 	}
 	else
@@ -85,6 +85,18 @@ app.get('/dial',function (req, res) {
 			number: menuOptions[keyPressed].number
 		});	
 	}
+});
+
+// Record
+app.get('/record', function (req, res) {
+
+	var a = require('./menuOptions.js');	
+	menuOptions = a.menuOptions;
+
+	res.render('record',{
+		menu: menuOptions,
+		dialledFrom: req.params.From
+	});
 });
 
 // Start Listening
