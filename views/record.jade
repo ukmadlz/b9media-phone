@@ -4,5 +4,5 @@ block content
 		| Please leave a message after the beep
 	Record()
 		each val, index in menu
-			Message(to=val.number from=from)
+			Message(to=val.number from=#{dialledFrom})
 				| You have a voicemail from the general office line from #{dialledFrom}
