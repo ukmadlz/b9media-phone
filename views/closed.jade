@@ -2,6 +2,6 @@ extend layout
 block content
 	Say(voice='man')
 		| The office is closed now office hours are between nine and five monday to friday if you would like to e mail the office use info at b nine media dot co dot uk
-	Gather()
+	Gather(action="/dial" method="GET" numDigits=1)
 		Say
 			| Other wise if you would like to leave a message please press zero

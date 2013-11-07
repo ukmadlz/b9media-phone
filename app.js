@@ -42,7 +42,10 @@ app.get('/', function (req, res) {
 
 	// Check that the office is open
 	var d=new Date();
-	if(d.getDay()>=1 && d.getDay()<=5 && d.getHours()>=9 && d.getHours()>17)
+	if( d.getDay()>=1 // Monday
+		&& d.getDay()<=5 // Friday
+		&& d.getHours()>=9 // 9am
+		&& d.getHours()<17) // 5pm
 	{
 		var a = require('./menuOptions.js');	
 		menuOptions = a.menuOptions;
@@ -61,15 +64,26 @@ app.get('/', function (req, res) {
 
 // Dial
 app.get('/dial',function (req, res) {
+	// Which key was pressed
 	var keyPressed = req.query.Digits;
 
 	var a = require('./menuOptions.js');	
 	menuOptions = a.menuOptions;
 
-	res.render('dial',{
-		name: menuOptions[keyPressed].name,
-		number: menuOptions[keyPressed].number
-	})
+	// If pressed 0
+	if(keyPressed=='0')
+	{
+		res.render('record',{
+			menu: menuOptions
+		});
+	}
+	else
+	{
+		res.render('dial',{
+			name: menuOptions[keyPressed].name,
+			number: menuOptions[keyPressed].number
+		});	
+	}
 });
 
 // Start Listening

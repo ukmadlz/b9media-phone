@@ -2,6 +2,8 @@ extend layout
 block content
 	Say(voice='man')
 		| Hi and thanks for calling b nine media, if you would like to talk to
-	Gather(action="/dial" method="GET")
+	Gather(action="/dial" method="GET" numDigits=1)
 			each val, index in menu
-				Say(voice='alice')=val.name+' press '+index
+				Say(voice='man')=val.name+' press '+index
+			Say(voice='man')
+				| To leave a message press zero
