@@ -2,7 +2,7 @@ extend layout
 block content
 	Say(voice='man')
 		| Please leave a message after the beep
+	each val, index in menu
+		Message(to=val.number from="#{dialledFrom}")
+			| You have a voicemail from the general office line from #{dialledFrom}
 	Record()
-		each val, index in menu
-			Message(to=val.number from="#{dialledFrom}")
-				| You have a voicemail from the general office line from #{dialledFrom}
