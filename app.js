@@ -74,7 +74,8 @@ app.get('/dial',function (req, res) {
 	if(keyPressed=='0')
 	{
 		res.render('record',{
-			menu: menuOptions
+			menu: menuOptions,
+			from: req.query.From
 		});
 	}
 	else
